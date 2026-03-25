@@ -1,3 +1,35 @@
+
+async def get_timetable()-> pandas.DataFrame:
+    """
+    Get current schedule 
+
+    Returns
+    -------
+    str
+        A string containing the timetable
+    """
+    import pandas as pd
+
+    df = pd.read_excel("test.xlsx", sheet_name="Sheet1")
+    return (df)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 async def get_additive_manufacturing_equipment(equipment_type: str=None)-> dict:
     """
     Retrieve additive manufacturing equipment and their descriptions based on type.
