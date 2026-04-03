@@ -1,0 +1,19 @@
+SESSION LOG
+===========
+Timestamp : 20260403_151628
+User      : TOL
+Request   : a small part that will take an hour to print
+
+APPROVED PLAN
+-------------
+Step 1: Fusion 360 - Use Fusion 360 - Duration: 1.5h - Booking required: No
+Step 2: Cura - Use Cura - Duration: 0.5h - Booking required: No
+Step 3: FDM 3D Printer - Use FDM 3D Printer - Duration: 1.1h - Booking required: Yes
+Step 4: Support Removal Tools - Use Support Removal Tools - Duration: 0.25h - Booking required: No
+Step 5: Calipers - Use Calipers - Duration: 0.1h - Booking required: No
+
+BOOKINGS
+--------
+  None
+
+TOTAL COST : €11.0
