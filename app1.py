@@ -1,12 +1,10 @@
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.ui import Console
-from autogen_agentchat.teams import RoundRobinGroupChat
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 from autogen_core.models import ModelInfo
 from dotenv import load_dotenv
 import os, asyncio, re, json
 
-load_dotenv()
 
 from tools1 import (
     get_user,
@@ -20,8 +18,10 @@ from tools1 import (
     write_session_log,
 )
 
+load_dotenv()
 
-client = OpenAIChatCompletionClient(
+
+client = OpenAIChatCompletionClient(  #Main client
     model="gemini-2.5-flash",
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
     api_key=os.environ['GOOGLE_API_KEY'],
@@ -34,18 +34,23 @@ client = OpenAIChatCompletionClient(
     )
 )
 
+# ── Helper: run one agent, return its last message ────────────────────────────
 
-async def run_agent(agent: AssistantAgent, task: str,max_turns:int=0) -> str:
-    '''Helper function to run agents and get last message'''
+async def run_agent(agent: AssistantAgent, task: str, max_turns: int) -> str:
     result = await agent.run(task=task)
-    
-    if result.messages:
-        last_msg = result.messages[-1]
-        return str(last_msg.content)
-    
+
+    for msg in reversed(result.messages):
+        # Skip the user prompt and any non-string or empty content
+        if getattr(msg, 'source', '') == 'user':
+            continue
+        if isinstance(msg.content, str) and msg.content.strip():
+            return msg.content
+
     return ""
+
+
 # ═════════════════════════════════════════════════════════════════════════════
-# Admin functions
+# Admin agent and function
 # ═════════════════════════════════════════════════════════════════════════════
 
 admin_agent = AssistantAgent(
@@ -67,15 +72,14 @@ admin_agent = AssistantAgent(
 )
 
 async def run_admin_session() -> None:
-    '''Simple bot converstaion where it can do stuff'''
     print("\n=== Admin Panel ===")
-    print("Commands: view files, show timetable, clear worksheets, read logs.")
+    print(f"You can ask the agent to check excel files and the timetable.\n The agent can also clear the timetable and read the logs to answer questions abot them")
     print("Type EXIT to quit.\n")
     while True:
         user_input = input("Admin> ").strip()
         if user_input.upper() == "EXIT":
             break
-        response = await run_agent(admin_agent, user_input)
+        response = await run_agent(admin_agent, user_input, max_turns=2)
         print(f"\n{response}\n")
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -108,53 +112,51 @@ planning_agent = AssistantAgent(
     model_client_stream=False,
 )
 
-timetable_agent = AssistantAgent(
-    name="timetable_agent",
-    model_client=client,
-    tools=[list_excel_files, get_available_slots],
-    system_message="""
-    You are a slot finder. 
-    1. Call list_excel_files to find the correct file and sheet.
-    2. Call get_available_slots.
-    3. Pick the ONE best slot matching user preferences.
-    
-    4. You MUST reply with ONLY valid JSON. No markdown, no extra text.
-    
-    If a slot is found, return exactly this format:
+
+
+
+def make_slot_picker_agent() -> AssistantAgent:
+    return AssistantAgent(
+        name="slot_picker_agent",
+        model_client=client,
+        tools=[],
+        system_message="""
+    You are given a list of available time slots and user preferences.
+    Pick the ONE slot that best matches the preferences.
+    Reply with ONLY valid JSON, no markdown, no extra text.
+
+    If a suitable slot exists:
     {"status": "FOUND", "day": "tuesday", "start": "18:00", "end": "22:00"}
-    
-    If no slots exist, return:
+
+    If none match the preferences:
     {"status": "NONE"}
     """,
-    reflect_on_tool_use=True,
-    model_client_stream=False,
-)
+        reflect_on_tool_use=False,
+        model_client_stream=False,
+    )
 
-booking_agent = AssistantAgent(
-    name="booking_agent",
-    model_client=client,
-    tools=[list_excel_files, add_booking],
-    system_message="""
-    You are a booking agent.
-    You will be given a tool name, username, day, start_time, and end_time.
-
-    1. Call list_excel_files to find the correct file and worksheet for the tool.
-    2. Call add_booking with:
-       - day: lowercase day name (e.g. "monday")
-       - start_time: HH:00 format (e.g. "18:00")
-       - end_time: HH:00 format (e.g. "21:00")
-       - name: the USERNAME (not the tool name)
-       - file_name: matched filename
-       - sheet_name: matched worksheet
-    3. Reply with ONLY: BOOKING_SUCCESS or BOOKING_FAILED
-    """,
-    reflect_on_tool_use=True,
-    model_client_stream=False,
-)
 
 # ═════════════════════════════════════════════════════════════════════════════
-# Plan Parsing
+# Helper functions
 # ═════════════════════════════════════════════════════════════════════════════
+
+
+
+#### TODO hardcode if possible
+def find_file_and_sheet(tool_name: str, files: dict) -> tuple[str, str] | None:
+    """Match a tool name to an Excel file and sheet using word overlap."""
+    tool_words = set(tool_name.lower().split())
+    best_score = 0
+    best_match = None
+    for filename, sheets in files.items():
+        for sheet in sheets:
+            sheet_words = set(sheet.lower().split())
+            score = len(tool_words & sheet_words)
+            if score > best_score:
+                best_score = score
+                best_match = (filename, sheet)
+    return best_match if best_score > 0 else None
+
 
 
 def get_tool_cost(tool_name: str, db: dict) -> int:
@@ -172,8 +174,9 @@ def get_tool_cost(tool_name: str, db: dict) -> int:
     return 0
 
 def clean_json_string(raw_text: str) -> str:
-    """Removes code blocks if LLM doens't give proper output"""
+    """Helper to strip markdown code blocks"""
     text = raw_text.strip()
+    # FIX: strip ```json or plain ``` fences
     if text.startswith("```"):
         text = text[text.index("\n") + 1:] if "\n" in text else text[3:]
     if text.endswith("```"):
@@ -189,8 +192,9 @@ async def parse_plan(raw_plan: str) -> tuple[list[dict], int]:
         print(f"[ERROR] Failed to parse JSON: {e}")
         return [], 0
 
+
     if not isinstance(steps, list):
-        print(f"[ERROR] Expected a JSON array but got {type(steps).__name__}")
+        print(f"[ERROR] Expected JSON array but got {type(steps).__name__}")
         return [], 0
 
     total_cost = 0
@@ -236,7 +240,7 @@ def rebuild_plan_text(steps: list[dict]) -> str:
     return plan
 
 async def format_plan_with_cost(steps: list[dict]) -> str:
-    """Human-readable plan yo print"""
+    """Human-readable plan"""
     lines = []
 
     total = 0
@@ -245,10 +249,7 @@ async def format_plan_with_cost(steps: list[dict]) -> str:
     
     for s in steps:
         hourly   = get_tool_cost(s['tool'], db)
-        cost_str="(free)"
-        if (s['cost'] > 0):
-            cost_str = f"@ €{hourly}/h = €{s['cost']}"
-
+        cost_str = f"@ €{hourly}/h = €{s['cost']}" if s['cost'] > 0 else "(free)"
         booking  = " [BOOKING REQUIRED]" if s.get('requires_booking') else ""
         lines.append(f"  {s['step']}: {s['tool']} — {s['duration_hours']}h {cost_str}{booking}")
         total += s['cost']
@@ -258,7 +259,7 @@ async def format_plan_with_cost(steps: list[dict]) -> str:
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# USER 
+# PHASES
 # ═════════════════════════════════════════════════════════════════════════════
 
 # ── Phase 1: Plan with user-editable durations ────────────────────────────────
@@ -322,9 +323,9 @@ async def planning_phase(user_request: str) -> tuple[str, list[dict], int]:
                 steps[idx]['duration_hours'] = new_dur
 
                 steps[idx]['cost'] = get_tool_cost(steps[idx]['tool'], db) * new_dur
-                print(f"\n Updated {steps[idx]['step']} to {new_dur}h")
+                print(f"\n✓ Updated {steps[idx]['step']} to {new_dur}h")
             except (ValueError, IndexError):
-                print("Invalid input - no changes made.")
+                print("Invalid input — no changes made.")
 
         else:
             task  = (
@@ -366,19 +367,19 @@ def discussion_phase(approved_plan: str, steps: list[dict]) -> str:
 
 # ── Phase 3: Booking ──────────────────────────────────────────────────────────
 
-MAX_BOOKING_ATTEMPTS = 3  # FIX: cap retries when booking_agent keeps failing
-
 async def booking_phase(
     steps: list[dict],
     preferences_text: str,
     username: str,
 ) -> tuple[list[dict], list[str], bool]:
-    
+
     bookings_log = []
     skipped      = []
     terminated   = False
-
     current_prefs = preferences_text
+
+    # Fetch file/sheet mapping once for the whole session
+    files = await list_excel_files()
 
     for item in steps:
         if not item.get('requires_booking'):
@@ -391,23 +392,46 @@ async def booking_phase(
         print(f"\n{'='*60}")
         print(f"Booking — {step}: {tool}  ({duration}h)")
 
+        # Resolve file and sheet directly in Python — no agent needed
+        match = find_file_and_sheet(tool, files)
+        if not match:
+            print(f"[ERROR] Could not match '{tool}' to any Excel sheet — skipping.")
+            skipped.append(tool)
+            continue
+        file_name, sheet_name = match
+
         local_prefs = current_prefs
         booked      = False
-        booking_attempts = 0  
 
         while not booked:
-            pref_clause = f" User preferences: {local_prefs}." if local_prefs else ""
-            slot_task   = (
-                f"Find the best {duration}-hour slot for '{tool}'.{pref_clause}"
-                f" Pick the slot that best matches the preferences."
-            )
+            # ── Step 1: get available slots directly ──────────────────────────
+            slots_raw = await get_available_slots(file_name, sheet_name, duration)
 
-            slot_result = await run_agent(timetable_agent, slot_task, max_turns=3)
-
-            parsed = parse_slot_result(slot_result)
-            
-            if not parsed:
+            if slots_raw == "NO_SLOTS_AVAILABLE":
                 print(f"\nNo {duration}h slot available for {tool}.")
+                print("Options:  SKIP  |  CANCEL  |  <new preference to retry>")
+                choice = input("Choice: ").strip()
+                if choice.upper() == "CANCEL":
+                    terminated = True
+                    return bookings_log, skipped, terminated
+                elif choice.upper() == "SKIP":
+                    skipped.append(tool)
+                    break
+                else:
+                    local_prefs = choice
+                    continue
+
+            # ── Step 2: ask LLM to pick best slot — NO tool calls ─────────────
+            pref_clause = f"User preferences: {local_prefs}." if local_prefs else "No preferences — pick the first available slot."
+            pick_task = (
+                f"Available {duration}-hour slots for '{tool}':  \n{slots_raw}\n\n"
+                f"{pref_clause}"
+            )
+            pick_result = await run_agent(make_slot_picker_agent(), pick_task, max_turns=1)
+            parsed = parse_slot_result(pick_result)
+
+            if not parsed:
+                print(f"\nCould not select a slot for {tool}.")
                 print("Options:  SKIP  |  CANCEL  |  <new preference to retry>")
                 choice = input("Choice: ").strip()
                 if choice.upper() == "CANCEL":
@@ -426,14 +450,10 @@ async def booking_phase(
             confirm = input("Accept? (YES / NO / SKIP / CANCEL): ").strip().upper()
 
             if confirm == "YES":
-                booking_attempts += 1
-                booking_result = await run_agent(
-                    booking_agent,
-                    f"Book slot for tool '{tool}' on {slot_day} from {slot_start} to {slot_end}. Username: '{username}'.",
-                    max_turns=2
-                )
-                if "BOOKING_SUCCESS" in booking_result:
-                    print(f"Booked {tool} — {slot_day.capitalize()} {slot_start}-{slot_end}")
+                # ── Step 3: book directly in Python — no agent needed ─────────
+                result = await add_booking(slot_day, slot_start, slot_end, username, file_name, sheet_name)
+                if result == "Success":
+                    print(f"✓ Booked {tool} — {slot_day.capitalize()} {slot_start}-{slot_end}")
                     bookings_log.append({
                         'tool':       tool,
                         'day':        slot_day,
@@ -444,14 +464,10 @@ async def booking_phase(
                     booked = True
                     current_prefs = local_prefs
                 else:
-                    if booking_attempts >= MAX_BOOKING_ATTEMPTS:
-                        print(f"[ERROR] Booking agent failed {MAX_BOOKING_ATTEMPTS} times for {tool} — skipping.")
-                        skipped.append(tool)
-                        break
-                    print(f"[WARN] Could not book {slot_day.capitalize()} {slot_start}-{slot_end} (slot may be taken) — searching for another slot.")
+                    print(f"[WARN] {result} — searching for another slot.")
 
             elif confirm == "NO":
-                new_pref = input("Describe an alternative time(or Enter to retry): ").strip()
+                new_pref = input("Describe what slot you want instead (or Enter to retry same): ").strip()
                 if new_pref:
                     local_prefs = new_pref
 
@@ -469,15 +485,13 @@ async def booking_phase(
 # USER SESSION
 # ═════════════════════════════════════════════════════════════════════════════
 
-async def run_user_session(username: str) -> None:    # Generates plan, perfroms booking and then logs everything
+async def run_user_session(username: str) -> None:
+    print(f"\n=== Manufacturing Booking System — Welcome, {username} ===\n")
+    user_request = input("What would you like to manufacture? ").strip()
 
-    print(f"\n Welcome, {username} ===\n")                    
-    user_request = input("What would you like to make? ").strip()
-
-
-    print("\n--- Generating plan ---") 
+    print("\n--- Generating manufacturing plan ---")
     approved_plan, steps, total_cost = await planning_phase(user_request)
-    print(f"\n Plan approved. Total cost: €{total_cost}")
+    print(f"\n✓ Plan approved. Total cost: €{total_cost}")
 
     needs_booking = [s for s in steps if s.get('requires_booking')]
     if needs_booking:
@@ -487,18 +501,18 @@ async def run_user_session(username: str) -> None:    # Generates plan, perfroms
 
     preferences_text = discussion_phase(approved_plan, steps)
 
-
-    if needs_booking:
+    if not needs_booking:
+        print("\nNo bookings required — all tools are freely available.")
+        bookings_log, skipped, terminated = [], [], False
+    else:
         bookings_log, skipped, terminated = await booking_phase(
             steps, preferences_text, username
         )
 
-    else:
-        print("\nNo bookings required — all tools are freely available.")
-        bookings_log, skipped, terminated = [], [], False
-
-
-
+    skipped_cost = sum(s['cost'] for s in steps if s.get('tool') in skipped)
+    total_cost -= skipped_cost
+    if skipped_cost:
+        print(f"Skipped bookings deducted: -€{skipped_cost}  →  Final cost: €{total_cost}")
 
     log_path = write_session_log(
         username=username,
@@ -520,8 +534,6 @@ async def main() -> None:
         await run_admin_session()
     else:
         await run_user_session(user)
-
-
 
 if __name__ == "__main__":
     asyncio.run(main())

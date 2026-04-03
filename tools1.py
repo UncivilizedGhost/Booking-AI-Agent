@@ -162,7 +162,7 @@ async def get_additive_manufacturing_equipment() -> dict:
             {'name': 'Calipers',                 'description': 'Dimensional measurement.',      'requires_booking': False, 'cost': 0},
             {'name': 'Micrometers',              'description': 'High-precision measurement.',    'requires_booking': False, 'cost': 0},
             {'name': '3D Scanner',               'description': 'Geometry verification.',         'requires_booking': True,  'cost': 5},
-            {'name': 'Surface Roughness Tester', 'description': 'Surface quality measurement.',   'requires_booking': False, 'cost': 0},
+            {'name': 'Surface Roughness Tester', 'description': 'Surface quality measurement.',   'requires_booking': True, 'cost': 0},
         ],
     }
     return db
