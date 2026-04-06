@@ -1,0 +1,57 @@
+SESSION LOG
+===========
+Timestamp : 20260406_232429
+User      : Bardock
+Request   : I want to scan an old hard drive enclosure for a server. I want to make some changes and print out a few cheap prototype and use them as refrence to finalize the design. Then I want to print a high quality version
+
+APPROVED PLAN
+-------------
+Step 1: 3D Scanner
+Scan the old hard drive enclosure to create a digital 3D model.
+Duration: 2h - Booking required: Yes
+
+Step 2: Fusion 360
+Import the scanned data, convert to a solid model, and design the necessary modifications for the new enclosure version.
+Duration: 8h - Booking required: No
+
+Step 3: Cura
+Prepare the modified design for FDM 3D printing by slicing the model and generating G-code for cheap prototypes.
+Duration: 1h - Booking required: No
+
+Step 4: FDM 3D Printer
+Print several cheap prototypes to evaluate the design, fit, and functionality.
+Duration: 12h - Booking required: Yes
+
+Step 5: Calipers
+Inspect and measure the prototypes to identify areas for improvement and finalize the design.
+Duration: 2h - Booking required: No
+
+Step 6: Fusion 360
+Apply final design adjustments to the 3D model based on prototype evaluation.
+Duration: 4h - Booking required: No
+
+Step 7: PreForm
+Prepare the finalized design for high-quality SLA 3D printing, including orienting the model.
+Duration: 1h - Booking required: No
+
+Step 8: SLA 3D Printer
+Print the high-quality version of the hard drive enclosure.
+Duration: 10h - Booking required: Yes
+
+Step 9: UV Curing Station
+Post-cure the SLA printed part to achieve final material properties and strength.
+Duration: 3h - Booking required: Yes
+
+Step 10: Calipers
+Perform a final quality inspection, including dimensional accuracy, on the high-quality printed enclosure.
+Duration: 1h - Booking required: No
+
+
+BOOKINGS
+--------
+  3D Scanner: monday 13:00-15:00 [booked]
+  FDM 3D Printer: tuesday 10:00-22:00 [booked]
+  SLA 3D Printer: sunday 06:00-16:00 [booked]
+  UV Curing Station: sunday 18:00-21:00 [booked]
+
+TOTAL COST : €295
