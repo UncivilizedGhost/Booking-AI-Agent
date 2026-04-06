@@ -1,0 +1,91 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="21VVTi6LkBdTKDMymRsY">
+    <mxGraphModel dx="2785" dy="1403" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n56Nwd96kQem_y__6VAz-13" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="n56Nwd96kQem_y__6VAz-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-1" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;center&quot;&gt;&amp;nbsp; I want to scan an old hard drive enclosure for a server.&amp;nbsp;&lt;/div&gt;&lt;div align=&quot;center&quot;&gt;I want to make some changes and print out a few cheap prototype and use them as reference to finalize the design.&amp;nbsp;&lt;/div&gt;&lt;div align=&quot;center&quot;&gt;Then I want to print a high quality version&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="210" x="100" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-44" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="n56Nwd96kQem_y__6VAz-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-51" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;fillColor=#d5e8d4;strokeColor=#000000;endArrow=none;endFill=0;" target="n56Nwd96kQem_y__6VAz-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-2" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;shadow=0;align=center;" value="&lt;b&gt;Step 1: 3D Scanner&lt;/b&gt;&lt;br&gt;&lt;div&gt;Scan the old hard drive enclosure to create a digital 3D model.&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&amp;nbsp;Duration: 2h&lt;/div&gt;&lt;div&gt;&lt;div align=&quot;left&quot;&gt;&amp;nbsp;Booking required: Yes&lt;br&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;&lt;b&gt;Step 2: Fusion 360&lt;/b&gt;&lt;br&gt;Import the scanned data, convert to a solid model, and design the necessary modifications for the new enclosure version.&lt;br&gt;&lt;div align=&quot;left&quot;&gt;&lt;div align=&quot;left&quot;&gt;&amp;nbsp;Duration: 8h&lt;/div&gt;&lt;div&gt;&lt;div align=&quot;left&quot;&gt;&amp;nbsp;Booking required: No&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 25px;&quot;&gt;&lt;b&gt;...&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 25px;&quot;&gt;&lt;b&gt;...&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;b&gt;Step 9: UV Curing Station&lt;/b&gt;&lt;br&gt;Post-cure the SLA printed part to achieve final material properties and strength.&lt;br&gt;&lt;div align=&quot;left&quot;&gt;&lt;div align=&quot;left&quot;&gt;&lt;div align=&quot;left&quot;&gt;&amp;nbsp;Duration: 3h&lt;/div&gt;&lt;div&gt;&lt;div align=&quot;left&quot;&gt;&amp;nbsp;Booking required: Yes&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;&lt;b&gt;Step 10:&amp;nbsp;&lt;/b&gt;&lt;br&gt;Perform a final quality inspection, on the high-quality printed enclosure.&lt;br&gt;&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;b&gt;TOTAL COST : €295&lt;/b&gt;" vertex="1">
+          <mxGeometry height="370" width="430" x="-10" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-33" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="n56Nwd96kQem_y__6VAz-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-7" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;" value="&lt;div&gt;Have the scanning on monday after lunch&lt;/div&gt;&lt;div&gt;Make the inital prints early in the week&lt;/div&gt;I want to do the final print during the weekend and use the curing station close to&lt;br&gt;&amp;nbsp;that time" vertex="1">
+          <mxGeometry height="110" width="220" x="890" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-8" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;align=center;" value="&lt;div align=&quot;center&quot;&gt;Steps requiring booking (4):&lt;br&gt;&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;&amp;nbsp; Step 1&lt;/b&gt;: 3D Scanner - 2h&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;justify&quot;&gt;&amp;nbsp;&lt;b&gt; Step 4:&lt;/b&gt; FDM 3D Printer - 12h&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;justify&quot;&gt;&amp;nbsp;&lt;b&gt; Step 8&lt;/b&gt;: SLA 3D Printer - 10h&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;&amp;nbsp; Step 9: &lt;/b&gt;UV Curing Station - 1h&lt;br&gt;&lt;/div&gt;&lt;br&gt;Enter booking preferences&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="210" x="890" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-18" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="n56Nwd96kQem_y__6VAz-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-15" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;" value="The UV machine won&#39;t need more then an hour" vertex="1">
+          <mxGeometry height="40" width="210" x="520" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-22" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="n56Nwd96kQem_y__6VAz-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-17" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;shadow=0;align=center;" value="&lt;div&gt;&lt;font style=&quot;font-size: 25px;&quot;&gt;&lt;b&gt;...&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;b&gt;Step 9: UV Curing Station&lt;/b&gt;&lt;br&gt;Post-cure the SLA printed part to achieve final material properties and strength.&lt;br&gt;&lt;div align=&quot;left&quot;&gt;&lt;div align=&quot;left&quot;&gt;&lt;div align=&quot;left&quot;&gt;&amp;nbsp;Duration: 1h&lt;/div&gt;&lt;div&gt;&lt;div align=&quot;left&quot;&gt;&amp;nbsp;Booking required: Yes&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 25px;&quot;&gt;&lt;b&gt;...&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="270" x="490" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-32" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="n56Nwd96kQem_y__6VAz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-21" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;" value="Approved" vertex="1">
+          <mxGeometry height="40" width="110" x="570" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-25" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.475;entryY=-0.002;entryDx=0;entryDy=0;entryPerimeter=0;" target="n56Nwd96kQem_y__6VAz-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-28" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="n56Nwd96kQem_y__6VAz-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-26" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;shadow=0;align=center;" value="&lt;b&gt;BOOKINGS&lt;/b&gt;&lt;br&gt;--------&lt;br&gt;&lt;div&gt;&lt;div align=&quot;justify&quot;&gt;3D Scanner:&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Monday&amp;nbsp; 13:00-15:00&lt;/div&gt;&lt;div align=&quot;justify&quot;&gt;FDM 3D Printer: Tuesday 10:00-22:00&lt;/div&gt;&lt;div align=&quot;justify&quot;&gt;SLA 3D Printer:&amp;nbsp; Sunday&amp;nbsp; &amp;nbsp;06:00-16:00&lt;/div&gt;&lt;div align=&quot;justify&quot;&gt;UV Station :&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Sunday&amp;nbsp; 18:00-19:00&amp;nbsp;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="270" x="865" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-38" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="n56Nwd96kQem_y__6VAz-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-27" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;" value="Approved" vertex="1">
+          <mxGeometry height="40" width="110" x="945" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-34" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Lucida Console;" value="get_additive_manufacturing_equipment" vertex="1">
+          <mxGeometry height="80" width="305" x="52.5" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-40" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;dashed=1;" target="n56Nwd96kQem_y__6VAz-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-35" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;font face=&quot;Lucida Console&quot;&gt;get_available_slots&lt;/font&gt;" vertex="1">
+          <mxGeometry height="87.5" width="160" x="1220" y="381.25" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-42" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;dashed=1;fillColor=#d5e8d4;strokeColor=#000000;endArrow=none;endFill=0;" target="n56Nwd96kQem_y__6VAz-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-48" edge="1" parent="1" source="n56Nwd96kQem_y__6VAz-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;fillColor=#d5e8d4;strokeColor=#070A06;endArrow=none;endFill=0;" target="n56Nwd96kQem_y__6VAz-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-36" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;shadow=0;align=center;" value="&lt;div&gt;&lt;b&gt;Equipment has been booked&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;===&amp;nbsp;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Session completed and logged&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="195" x="902.5" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-41" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;font face=&quot;Lucida Console&quot;&gt;add_booking&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="160" x="1220" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="n56Nwd96kQem_y__6VAz-46" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;font face=&quot;Lucida Console&quot;&gt;write_session_log&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="160" x="650" y="625" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
