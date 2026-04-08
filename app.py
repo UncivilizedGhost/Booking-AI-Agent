@@ -7,18 +7,7 @@ import os, asyncio, re, json
 import datetime
 
 
-from tools import (
-    get_user,
-    get_timetable,
-    get_additive_manufacturing_equipment,
-    get_available_slots,
-    add_booking,
-    clear_worksheet,
-    list_excel_files,
-    read_log_files,
-    write_session_log,
-    add_equipment
-)
+from tools import *
 
 load_dotenv()
 
@@ -109,7 +98,7 @@ async def validated_input(prompt: str, rules: str) -> str:
 admin_agent = AssistantAgent(
     name="admin_agent",
     model_client=client,
-    tools=[list_excel_files, get_timetable, clear_worksheet, read_log_files,add_equipment],
+    tools=[list_excel_files, get_timetable, clear_worksheet, read_log_files,add_equipment,get_additive_manufacturing_equipment,change_equpment],
     system_message="""
     You are an admin assistant for a manufacturing lab.
     Handle these requests:
@@ -117,8 +106,10 @@ admin_agent = AssistantAgent(
     - "show timetable / schedule for X" - call list_excel_files first, then get_timetable
     - "clear sheet X" - confirm then call clear_worksheet
     - "show logs / summarize logs" - call read_log_files and summarize clearly
-    - add equpment - calls add_equipment (asks user if are parementers are not given)
-
+    - "add equpment" - calls add_equipment (asks user if are parementers are not given)
+    - "change x / make x" - calls get_additive_manufacturing_equipment then makes changes to the dicitonary and calls change_equpment to save them. It does it all at once 
+    - If you are getting ready to make changes repsond with a list of chanages and ask for confirmation
+    
     Always confirm before clearing. Be concise.
     """,
     reflect_on_tool_use=True,

@@ -142,6 +142,24 @@ async def get_additive_manufacturing_equipment() -> dict:
     return db
 
 
+async def change_equpment(db:dict) -> dict:
+    """
+    Takes in a dictionary to store all the equpment
+
+    Returns
+    -------
+    dict
+        Categories mapped to lists of {name, description, requires_booking, cost}.
+        cost is € per hour. requires_booking is a bool.
+    """
+    with open("equipment.json", "w") as f:
+        db = json.dump(db,f,indent=4)
+    return db
+
+
+
+
+
 
 async def add_equipment(category: str,name: str,description: str,booking: bool,cost: int) -> dict:
     """
@@ -178,32 +196,32 @@ async def add_equipment(category: str,name: str,description: str,booking: bool,c
         json.dump(db, f, indent=4)
 
 
-    if booking:
-        print(booking)
-        wb = load_workbook(filename = f"{category}.xlsx")
-        wb.create_sheet(name)
-        sheet=wb[name]
+    add_booking(category,name)
 
-        sheet["A1"] = "Time"
-        for day in DAY_COL:
-            sheet[f"{DAY_COL[day]}1"] = day.capitalize()
-            hour=6
-        for i in range(2,19):
-            sheet[f"A{i}"] = time(hour,0,0)
-            hour+=1
-        try:
-            del wb['Sheet']
-        except:
-            pass
-        wb.save(f"{category}.xlsx")
         
-
-
 
     return db
 
 
 
+async def add_booking(category,name):
+    print(booking)
+    wb = load_workbook(filename = f"{category}.xlsx")
+    wb.create_sheet(name)
+    sheet=wb[name]
+
+    sheet["A1"] = "Time"
+    for day in DAY_COL:
+        sheet[f"{DAY_COL[day]}1"] = day.capitalize()
+        hour=6
+    for i in range(2,19):
+        sheet[f"A{i}"] = time(hour,0,0)
+        hour+=1
+    try:
+        del wb['Sheet']
+    except:
+        pass
+    wb.save(f"{category}.xlsx")
 
 
 
@@ -418,7 +436,8 @@ def write_session_log(
 
 import asyncio
 
-# async def main():
+async def main():
+    await change_equpment( await get_additive_manufacturing_equipment())
 
 #     await add_equipment('testa','best','testa',True,100)
 
