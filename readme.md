@@ -16,8 +16,7 @@ This repository contains an autonomous booking agent designed to streamline work
 
 ### 1. Clone the Repository
 ```bash
-git clone <your-repository-url>
-cd <repository-folder>
+git clone https://github.com/UncivilizedGhost/Booking-AI-Agent.git
 ```
 
 ### 2. Install Dependencies
