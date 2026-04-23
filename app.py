@@ -110,7 +110,7 @@ admin_agent = AssistantAgent(
 
 async def run_admin_session() -> None:
     print("\n=== Admin Panel ===")
-    print(f"You can ask the agent to check excel files and the timetable.\n The agent can also clear the timetable and read the logs to answer questions abot them")
+    print(f"You can ask the agent to check excel files and the timetable.\n The agent can also clear the timetable and read the logs to answer questions about them")
     print("Type EXIT to quit.\n")
     while True:
         user_input = input("Admin> ").strip()
@@ -416,7 +416,6 @@ async def discussion_phase(approved_plan: str, steps: list[dict]) -> str:
         print("   Noted.")
 
     preferences_text = " ".join(preferences_lines)
-    print(f"\n[DEBUG] discussion_phase: preferences = '{preferences_text}'")
     print(" Proceeding to booking.\n")
     return preferences_text
 

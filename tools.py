@@ -21,10 +21,8 @@ def get_user() -> str:
             hashed_input = hashlib.sha256(password.encode()).hexdigest()
 
             if hashed_input == os.environ.get("PASSWORD", ""):
-                print("[DEBUG] get_user: admin authenticated successfully")
                 return "admin"
             else:
-                print("[DEBUG] get_user: incorrect password")
                 attempts += 1
         else:
             return username
